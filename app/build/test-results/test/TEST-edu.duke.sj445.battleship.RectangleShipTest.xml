@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.duke.sj445.battleship.RectangleShipTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-02-18T19:59:26" hostname="vcm-46190.vm.duke.edu" time="0.014">
+  <properties/>
+  <testcase name="test_makeCoords()" classname="edu.duke.sj445.battleship.RectangleShipTest" time="0.006"/>
+  <testcase name="test_sunk()" classname="edu.duke.sj445.battleship.RectangleShipTest" time="0.002"/>
+  <testcase name="test_Hit()" classname="edu.duke.sj445.battleship.RectangleShipTest" time="0.001"/>
+  <testcase name="test_getCoordinates()" classname="edu.duke.sj445.battleship.RectangleShipTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
