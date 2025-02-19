@@ -1,72 +1,71 @@
 package edu.duke.sj445.battleship;
 
-/**
-   * Constructs a Placement with the specified Coordinate and the orientation.
-   * @param coord.
-   * @param orientation is V / H.
-   * @throws IllegalArgumentException if the length of the string is invalid(e.g "A") or the there are extra char (e.g"A1vg").
-   * @throws IllegalArgumentException if the characters in the string are invalid(e.g "/@").
-   * @throws IllegalArgumentException if the third characters in the string are invalid(e.g "g/a(chars are not V/H"). 
-   */
-
-
 public class Placement {
-  private final Coordinate coord;
-  private final Character Orientation;
+  final Coordinate where;
+  final char orientation;
 
-  public Coordinate getCoordinate(){
-    return coord;
-    
+  Coordinate getWhere(){
+    return where;
   }
 
-  public Character getOrientation(){
-    return Orientation;
-  }
-  
-  public Placement(Coordinate c1, Character o1) {
-    this.coord = c1;
-    /*
-      try to keep all the orientation in the upperCase way;
-     */
-    this.Orientation = Character.toUpperCase(o1);
+  char getOrientation(){
+    return orientation;
   }
 
-   public Placement(String descr){
-     if (descr.length() != 3) {
-      throw new IllegalArgumentException("The string length is not correct");
+  /**
+   * Constructs Placement with the specified coordinate
+   * and character
+   * @param w is the coordinate.
+   * @param o is the orientation.
+   */
+  public Placement(Coordinate w, char o) {
+    this.where = w;
+    o = Character.toUpperCase(o);
+    if(o!='H' && o!='V' && o != 'U' && o != 'R' && o != 'D' && o != 'L'){
+      throw new IllegalArgumentException("That placement is invalid: it does not have the correct format.");
     }
+    this.orientation = o;
+  }
 
-     this.coord = new Coordinate(descr.substring(0,2));
-     int i = 2;
-     if(descr.charAt(i) == 'v' || descr.charAt(i) == 'h' || descr.charAt(i) == 'V' || descr.charAt(i) == 'H' ||descr.charAt(i) == 'u' ||
-             descr.charAt(i) == 'U' || descr.charAt(i) == 'R' || descr.charAt(i) == 'r' || descr.charAt(i) == 'd'||descr.charAt(i) == 'D'||
-             descr.charAt(i) == 'l' || descr.charAt(i) == 'L'
-     ){
-       this.Orientation = Character.toUpperCase(descr.charAt(i));
-     }
-     else{
-       throw new IllegalArgumentException("The Orientation is not valid");
-     }
+  /**
+   * Constructs placement with the specified String(e.g. "A0V")
+   * @param descr can be transformed to the orientation placed at 
+   * row and column of coordinate. (e.g. "V" at row = 0, column = 0)
+   */
+  public Placement(String descr){
+    if (descr.length() < 2){
+      throw new IllegalArgumentException("That placement is invalid: it does not have the correct format."); 
+    }
+    Coordinate c = new Coordinate(descr.substring(0, 2));
+    this.where = c;
+
+    char o = descr.toUpperCase().charAt(descr.length() - 1);
+    if(o!='H' && o!='V' && o != 'U' && o != 'R' && o != 'D' && o != 'L'){
+      throw new IllegalArgumentException("That placement is invalid: it does not have the correct format.");
+    }
+    this.orientation = o;
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (o.getClass().equals(getClass())) {
-      Placement c = (Placement) o ;
-      return coord.getRow() == c.coord.getRow() && coord.getColumn() == c.coord.getColumn() && Orientation == c.Orientation;
+  public boolean equals(Object p) {
+    //requires that o has *exactly* the same class as "this" object
+    if (p.getClass().equals(getClass())) {
+      Placement c = (Placement) p;
+      if(where.equals(c.where)){        
+        return orientation == c.orientation;
+      }
+      return false;
     }
     return false;
   }
 
-
-   @Override
-  public int hashCode() {
-    return toString().hashCode();
-  }
-
   @Override
   public String toString() {
-    return "("+Orientation+ ")";
+    return Integer.toString(where.getRow()) + where.getColumn() + this.orientation;
+  }
+  @Override
+  public int hashCode() {
+    return toString().hashCode();
   }
 
 }

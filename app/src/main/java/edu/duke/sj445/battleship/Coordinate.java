@@ -1,73 +1,55 @@
 package edu.duke.sj445.battleship;
 
-
-/**
-   * Constructs a Coordinate  with the specified row
-   * and coordinate
-   * @param row is the Abscissa.
-   * @param column is the ordinate.
-   * @throws IllegalArgumentException if the length of the string is invalid(e.g "A") or the there are extra char (e.g"A12").
-   * @throws IllegalArgumentException if the characters in the string are invalid(e.g "/@"). 
-   */
-
-
 public class Coordinate {
+  
   private final int row;
   private final int column;
 
-  public int getRow() {
+  public int getRow(){
     return row;
   }
-
-  public int getColumn() {
+  public int getColumn(){
     return column;
   }
 
+   /**
+   * Constructs coordinate with the specified row
+   * and column
+   * @param r is the row of the newly constructed coordinate.
+   * @param c is the column of the newly constructed coorndinate.
+   */
   public Coordinate(int r, int c) {
     this.row = r;
     this.column = c;
   }
 
+  /**
+   * Constructs coordinate with the specified String(e.g. "A2")
+   * @param descr can be transformed to the row and column of 
+   * the newly constructed coordinate. (e.g. row = 0, column = 2)
+   */
   public Coordinate(String descr) {
-
-    int r = 0;
-    int c = 0;
-
-    if (descr.length() < 2) {
-      throw new IllegalArgumentException("The string length is not correct");
+    if (descr.length() != 2 ){
+       throw new IllegalArgumentException("Coordinate's String format must be 2 characters.");
     }
+    descr = descr.toUpperCase();
+    char rowLetter = descr.charAt(0);
 
-    for (int i = 0; i < descr.length(); ++i) {
-      if (i == 0) {
-        char rowLetter = Character.toUpperCase(descr.charAt(i));
-
-        if (rowLetter < 'A' || rowLetter > 'Z') {
-          throw new IllegalArgumentException("The rowLetter is not correct" + rowLetter);
-        }
-
-        r = rowLetter - 'A';
-
-      }
-
-      if (i == 1) {
-
-        char columnLetter = descr.charAt(i);
-        if (!Character.isDigit(columnLetter)) {
-          throw new IllegalArgumentException("The columnLetter is not correct" + columnLetter);
-        }
-        c = Character.getNumericValue(columnLetter);
-      }
-
-      if (i > 1) {
-        throw new IllegalArgumentException("The length of the string is beyond the bourdary");
-      }
+    if (rowLetter < 'A' || rowLetter > 'Z'){
+      throw new IllegalArgumentException("Coordinate's first character must be A-Z but is " + rowLetter);
     }
-    this.row = r;
-    this.column = c;
+    this.row = rowLetter - 'A';
+    
+    char colLetter = descr.charAt(1);
+    if (colLetter < '0' || colLetter > '9'){
+      throw new IllegalArgumentException("Coordinate's column character must be 0-9 but is" + colLetter);
+    }
+    this.column = colLetter - '0';
   }
 
   @Override
   public boolean equals(Object o) {
+    //requires that o has *exactly* the same class as "this" object
     if (o.getClass().equals(getClass())) {
       Coordinate c = (Coordinate) o;
       return row == c.row && column == c.column;
@@ -77,12 +59,10 @@ public class Coordinate {
 
   @Override
   public String toString() {
-    return "(" + row + ", " + column + ")";
+    return "("+row+", " + column+")";
   }
-
   @Override
   public int hashCode() {
     return toString().hashCode();
   }
-
 }

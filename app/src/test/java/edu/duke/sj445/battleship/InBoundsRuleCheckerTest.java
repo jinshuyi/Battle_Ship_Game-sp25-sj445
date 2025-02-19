@@ -1,39 +1,28 @@
 package edu.duke.sj445.battleship;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
 public class InBoundsRuleCheckerTest {
   @Test
-  public void test_checkMyRule() {
-    InBoundsRuleChecker<Character> t = new InBoundsRuleChecker<>(null);
-    Coordinate upperLeft = new Coordinate(1, 2);
-    RectangleShip<Character> tmp = new RectangleShip<>("Lucy", upperLeft, 1, 3, 's', '*','v');
-    Board<Character> b1 = new BattleShipBoard<Character>(10, 20, t, 'X');
-    Board<Character> b2 = new BattleShipBoard<Character>(2, 2, t ,'X');
-    Board<Character> b3 = new BattleShipBoard<Character>(1, 3, t ,'X');
-    assertNull(t.checkMyRule(tmp, b1));
-    assertEquals("That placement is invalid: the ship goes off the bottom of the board.",t.checkMyRule(tmp, b2));
-    assertEquals("That placement is invalid: the ship goes off the right of the board.",t.checkMyRule(tmp, b3));
-    assertNull(t.checkPlacement(tmp, b1));
-    assertEquals("That placement is invalid: the ship goes off the bottom of the board.",t.checkPlacement(tmp, b2));
-    
-    
-    Coordinate upperLeft_2 = new Coordinate(1, 1);
-    RectangleShip<Character> tmp_2 = new RectangleShip<>("Lucy", upperLeft_2, 1, 3, 's', '*','v');
-    Board<Character> b_Collision = new BattleShipBoard<Character> (10, 20, t,'X');
-    AbstractShipFactory<Character> factory = new V1ShipFactory();
-    Ship<Character> s = factory.makeSubmarine(new Placement("A1V"));
-    b_Collision.tryAddShip(s);
-    assertEquals("That placement is invalid: the ship overlaps another ship.",t.checkCollision(tmp_2, b_Collision));
+  public void test_() {
+    PlacementRuleChecker<Character> rc = new InBoundsRuleChecker<Character>(null);
+    Board<Character> b = new BattleShipBoard<Character>(10, 26, rc, 'X');
+    V1ShipFactory f = new V1ShipFactory();
 
-    RectangleShip<Character> tmp_3 = new RectangleShip<>("Lucy", new Coordinate(-5, 2), 1, 1, 's', '*','v');
-    assertEquals("That placement is invalid: the ship goes off the top of the board.",t.checkMyRule(tmp_3, b2));
+    Ship<Character> s1 = f.makeBattleship(new Placement(new Coordinate(3,5),'H'));
+    Ship<Character> s2 = f.makeBattleship(new Placement(new Coordinate(-1,2),'V'));
+    Ship<Character> s3 = f.makeBattleship(new Placement(new Coordinate(26,2),'V'));
+    Ship<Character> s4 = f.makeBattleship(new Placement(new Coordinate(2,-1),'H'));
+    Ship<Character> s5 = f.makeBattleship(new Placement(new Coordinate(3,8),'H'));
 
-    RectangleShip<Character> tmp_4 = new RectangleShip<>("Lucy", new Coordinate(1, -6), 1, 1, 's', '*','v');
-    assertEquals("That placement is invalid: the ship goes off the left of the board.",t.checkMyRule(tmp_4, b2));
-
+    assertEquals(rc.checkPlacement(s1,b), null);
+    assertEquals(rc.checkPlacement(s2,b),"That placement is invalid: the ship goes off the top of the board.");
+    assertEquals(rc.checkPlacement(s3,b),"That placement is invalid: the ship goes off the bottom of the board.");
+    assertEquals(rc.checkPlacement(s4,b),"That placement is invalid: the ship goes off the left of the board.");
+    assertEquals(rc.checkPlacement(s5,b),"That placement is invalid: the ship goes off the right of the board.");
   }
-}
 
+}

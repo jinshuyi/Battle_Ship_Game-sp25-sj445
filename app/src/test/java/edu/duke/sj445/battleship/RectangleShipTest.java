@@ -1,83 +1,69 @@
 package edu.duke.sj445.battleship;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 public class RectangleShipTest {
   @Test
-  public void test_with_makeCoords() {
-    HashSet<Coordinate> expected = new HashSet<>();
-    expected.add(new Coordinate(1, 2));
-    expected.add(new Coordinate(2, 2));
-    expected.add(new Coordinate(3, 2));
+  public void test_makeCoords() {
+     HashSet<Coordinate> ShipSet = new HashSet<Coordinate>();
 
-    Coordinate upperLeft = new Coordinate(1, 2);
-    HashSet<Coordinate> ans = RectangleShip.makeCoords(upperLeft, 1, 3);
-    assertEquals(ans, expected);
+     Coordinate c1 = new Coordinate(1, 2);
+     Coordinate c2 = new Coordinate(2, 2);
+     Coordinate c3 = new Coordinate(3, 2);
+     Coordinate c4 = new Coordinate(0, 2);
 
+     ShipSet.add(c1);
+     ShipSet.add(c2);
+     ShipSet.add(c3);
+     ShipDisplayInfo<Character> info = new SimpleShipDisplayInfo<Character>('a', 'b');
+     RectangleShip<Character> rc = new RectangleShip<Character>("submarine", c1, 1, 3, 's', '*', new Placement(c1, 'H'));
+     
+     assertEquals(true, rc.occupiesCoordinates(c1));
+     assertEquals(true, rc.occupiesCoordinates(c2));
+     assertEquals(true, rc.occupiesCoordinates(c3));
+     assertEquals(false, rc.occupiesCoordinates(c4));
+  }
+  
+  @Test
+  public void test_Hit(){
+    Coordinate c1 = new Coordinate(1, 2);
+    Coordinate c2 = new Coordinate(2, 4);
+    ShipDisplayInfo<Character> info = new SimpleShipDisplayInfo<Character>('a', 'b');
+    RectangleShip<Character> rc = new RectangleShip<Character>("submarine", c1, 1, 3, 's', '*', new Placement(c1, 'H'));
+    assertThrows(IllegalArgumentException.class, () -> rc.checkCoordinateInThisShip(c2));
+    assertEquals(false, rc.wasHitAt(c1));
+    rc.recordHitAt(c1);
+    assertEquals(true, rc.wasHitAt(c1));
   }
 
   @Test
-  public void test_with_new_constructor() {
-
-    Coordinate upperLeft = new Coordinate(1, 2);
-    RectangleShip<Character> tmp = new RectangleShip<>("Lucy", upperLeft, 1, 3, 's', '*','v');
-    assertTrue(tmp.occupiesCoordinates(new Coordinate(2, 2)));
-  }
-
-  @Test
-  public void test_with_recordHitAt() {
-    Coordinate upperLeft = new Coordinate(1, 2);
-    RectangleShip<Character> tmp = new RectangleShip<>("Lucy", upperLeft, 1, 3, 's', '*','v');
-    assertThrows(IllegalArgumentException.class, () -> tmp.checkCoordinateInThisShip(new Coordinate(4, 5)));
-    assertThrows(IllegalArgumentException.class, () -> tmp.recordHitAt(new Coordinate(4, 5)));
-    tmp.recordHitAt(new Coordinate(2, 2));
-    assertTrue(tmp.wasHitAt(new Coordinate(2, 2)));
-    assertFalse(tmp.isSunk());
-  }
-
-  @Test
-  public void test_is_Sunk() {
-    Coordinate upperLeft = new Coordinate(1, 2);
-    RectangleShip<Character> tmp = new RectangleShip<>("Lucy", upperLeft, 1, 3, 's', '*','v');
-    tmp.recordHitAt(new Coordinate(1, 2));
-    tmp.recordHitAt(new Coordinate(2, 2));
-    tmp.recordHitAt(new Coordinate(3, 2));
-    assertTrue(tmp.isSunk());
-  }
-
-  @Test
-  public void test_get_name() {
-    Coordinate upperLeft = new Coordinate(1, 2);
-    RectangleShip<Character> tmp = new RectangleShip<>("Lucy", upperLeft, 1, 3, 's', '*','v');
-    assertEquals("Lucy", tmp.getName());
+  public void test_sunk(){
+    Coordinate c1 = new Coordinate(1, 2);
+    Coordinate c2 = new Coordinate(2, 2);
+    ShipDisplayInfo<Character> info = new SimpleShipDisplayInfo<Character>('a', 'b');
+    RectangleShip<Character> rc = new RectangleShip<Character>("submarine", c1, 1, 2, 's', '*', new Placement(c1, 'H'));
+    assertEquals("submarine", rc.getName());
+    rc.recordHitAt(c1);
+    assertEquals(false, rc.isSunk());
+    rc.recordHitAt(c2);
+    assertEquals(true, rc.isSunk());
   }
 
   @Test
   public void test_getCoordinates(){
-    Coordinate upperLeft = new Coordinate(1, 2);
-    RectangleShip<Character> tmp = new RectangleShip<>("Lucy", upperLeft, 1, 3, 's', '*','v');
-    HashSet<Coordinate> expected = new HashSet<>();
-    expected.add(new Coordinate(1, 2));
-    expected.add(new Coordinate(2, 2));
-    expected.add(new Coordinate(3, 2));
-    assertEquals(tmp.getCoordinates(), expected);
-  }
-
-  @Test
-  public void test_getDisplay(){
-    Coordinate upperLeft = new Coordinate(1, 2);
-    ShipDisplayInfo<Character> my =  new SimpleShipDisplayInfo<>('a','b');
-    ShipDisplayInfo<Character> enermy =  new SimpleShipDisplayInfo<>('c','d');
-    RectangleShip<Character> tmp = new RectangleShip<>("Lucy", upperLeft, 1, 3, my, enermy,'v');
-    assertEquals('a',tmp.getDisplayInfoAt(new Coordinate(2,2), true));
-    assertEquals('c',tmp.getDisplayInfoAt(new Coordinate(2,2), false));
+    HashSet<Coordinate> c = new HashSet<Coordinate>();
+    Coordinate c1 = new Coordinate(1, 2);
+    Coordinate c2 = new Coordinate(2, 2);
+    ShipDisplayInfo<Character> info = new SimpleShipDisplayInfo<Character>('a', 'b');
+    RectangleShip<Character> rc = new RectangleShip<Character>("submarine", c1, 1, 2, 's', '*', new Placement(c1, 'H'));
+    c.add(c1);
+    c.add(c2);
+    assertEquals(c, rc.getCoordinates());
   }
 }

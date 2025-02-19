@@ -1,30 +1,23 @@
 package edu.duke.sj445.battleship;
 
-/*
-@param T:one for myData and one for onHit
-@getInfo: try to confirm whether the coordinate has been hitted or not
- */
+public class SimpleShipDisplayInfo<T> implements ShipDisplayInfo<T>{
+  private T myData;
+  private T onHit;
 
-
-public class SimpleShipDisplayInfo<T> implements ShipDisplayInfo<T> {
-
-  T myData;
-  T onHit;
-
-  public SimpleShipDisplayInfo(T my, T hit) {
-    this.myData = my;
-    this.onHit = hit;
+  public SimpleShipDisplayInfo(T myData, T onHit){
+    this.myData = myData;
+    this.onHit = onHit;
   }
-
+    
   @Override
   public T getInfo(Coordinate where, boolean hit) {
     // TODO Auto-generated method stub
-    if (hit == true) {
+    if (hit){
       return onHit;
-    } else {
+    }
+    else{
       return myData;
     }
-
   }
 
 }

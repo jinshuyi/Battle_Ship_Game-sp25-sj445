@@ -6,10 +6,13 @@ import org.junit.jupiter.api.Test;
 
 public class SimpleShipDisplayInfoTest {
   @Test
-  public void test_with_simple_ship_display() {
-    SimpleShipDisplayInfo<Character> info = new SimpleShipDisplayInfo<>('a','c');
-    assertEquals('c', info.getInfo(new Coordinate(1,2),true));
-    assertEquals('a', info.getInfo(new Coordinate(1,2),false));
+  public void test_() {
+    Coordinate c1 = new Coordinate(1, 1);
+    Character myData = 'a';
+    Character onHit = 'b';
+    ShipDisplayInfo<Character> ship = new SimpleShipDisplayInfo<Character>(myData, onHit);
+    assertEquals('a', ship.getInfo(c1, false));
+    assertEquals('b', ship.getInfo(c1, true));
   }
 
 }

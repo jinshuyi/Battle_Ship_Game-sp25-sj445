@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.duke.sj445.battleship.ShipTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-02-19T00:58:36" hostname="vcm-46190.vm.duke.edu" time="0.003">
+<testsuite name="edu.duke.sj445.battleship.ShipTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-02-19T02:53:11" hostname="vcm-46190.vm.duke.edu" time="0.001">
   <properties/>
-  <testcase name="test_()" classname="edu.duke.sj445.battleship.ShipTest" time="0.003"/>
+  <testcase name="test_()" classname="edu.duke.sj445.battleship.ShipTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

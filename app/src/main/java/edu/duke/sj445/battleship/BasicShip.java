@@ -1,67 +1,51 @@
 package edu.duke.sj445.battleship;
 
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 
 public abstract class BasicShip<T> implements Ship<T> {
 
+  /**
+   * myPieces.get(c) = null, c is not part of this Ship
+   * myPieces.get(c) = false, c is part of this ship and has not been hit
+   * myPieces.get(c) = true, c is part of this ship and has been hit
+   */
   protected HashMap<Coordinate, Boolean> myPieces;
   protected ShipDisplayInfo<T> myDisplayInfo;
+
   protected ShipDisplayInfo<T> enemyDisplayInfo;
-  //For version * 2//
-  protected HashMap<Coordinate, Integer> myPieces_order;
-  protected List<Integer> order_hit;
 
 
-
-
-  
-  public BasicShip(Iterable<Coordinate> where, ShipDisplayInfo<T> myDisplayInfo, ShipDisplayInfo<T> enemyDisplayInfo, HashMap<Coordinate, Integer> myPieces_order) {
+  public BasicShip(Iterable<Coordinate> where, ShipDisplayInfo<T> myDisplayInfo, ShipDisplayInfo<T> enemyDisplayInfo){
     this.myDisplayInfo = myDisplayInfo;
-    this.enemyDisplayInfo = enemyDisplayInfo;
-    myPieces = new HashMap<Coordinate, Boolean>();
-    for (Coordinate c : where) {
-      myPieces.put(c, false);
+    this.myPieces = new HashMap<Coordinate, Boolean>();
+    for(Coordinate c: where){
+      this.myPieces.put(c, false);
     }
-    this.myPieces_order = myPieces_order;
+    this.enemyDisplayInfo = enemyDisplayInfo;
   }
 
-  // public HashMap<Coordinate, Boolean> get_myPieces(){
-  // return myPieces;
-  // }
-  @Override
-  public HashMap<Coordinate, Integer> getMyPieces_order(){
-    return myPieces_order;
-  }
-
-  @Override
-  public Iterable<Coordinate> getCoordinates() {
-    return myPieces.keySet();
-
+  /**
+   * check if c is part of this ship (in myPieces),
+   * and if not, throw an IllegalArgumentException.
+   */
+  protected void checkCoordinateInThisShip(Coordinate c){
+    if(!this.myPieces.containsKey(c)){
+      throw new IllegalArgumentException("This ship dose not contains that coordinate.");
+    }
   }
 
   @Override
   public boolean occupiesCoordinates(Coordinate where) {
     // TODO Auto-generated method stub
-    // return where.equals(myLocation);
-    return myPieces.containsKey(where);
-  }
-
-  protected void checkCoordinateInThisShip(Coordinate c) {
-    if (occupiesCoordinates(c) == false) {
-      throw new IllegalArgumentException("This coordinate is not in the ship.");
-    }
+    return this.myPieces.containsKey(where);
   }
 
   @Override
   public boolean isSunk() {
     // TODO Auto-generated method stub
-    for (Coordinate c : myPieces.keySet()) {
-      checkCoordinateInThisShip(c);
-      if (myPieces.get(c) == false) {
+    for (HashMap.Entry<Coordinate, Boolean> set : myPieces.entrySet()) {
+      // iterate all elements
+      if (!set.getValue()){
         return false;
       }
     }
@@ -72,41 +56,30 @@ public abstract class BasicShip<T> implements Ship<T> {
   public void recordHitAt(Coordinate where) {
     // TODO Auto-generated method stub
     checkCoordinateInThisShip(where);
-    for (Coordinate c : myPieces.keySet()) {
-      if (c.equals(where)) {
-        myPieces.replace(c, true);
-      }
-    }
+    this.myPieces.put(where, true);
   }
 
   @Override
   public boolean wasHitAt(Coordinate where) {
     // TODO Auto-generated method stub
     checkCoordinateInThisShip(where);
-    return myPieces.get(where);
+    return this.myPieces.get(where);
   }
 
   @Override
-  public T getDisplayInfoAt(Coordinate where,boolean myShip) {
-    // TODO Auto-generated method stub
+  public T getDisplayInfoAt(Coordinate where, boolean myShip) {
+   //TODO this is not right.  We need to
+    //look up the hit status of this coordinate
     checkCoordinateInThisShip(where);
-    if(myShip == true){
-    return myDisplayInfo.getInfo(where, wasHitAt(where));
+    if(myShip){
+			return myDisplayInfo.getInfo(where, wasHitAt(where));
+		}else{
+			return enemyDisplayInfo.getInfo(where, wasHitAt(where));
+		}
   }
-    else{
-      return enemyDisplayInfo.getInfo(where, wasHitAt(where));
-    }
-  }
-
 
   @Override
-  public List<Integer> getOrder_hit(){
-    List<Integer> Order_hit = new ArrayList<>();
-    for (Coordinate c : myPieces.keySet()){
-      if (myPieces.get(c) == true){
-        Order_hit.add(myPieces_order.get(c));
-      }
-    }
-    return Order_hit;
+  public Iterable<Coordinate> getCoordinates(){
+    return myPieces.keySet(); 
   }
 }

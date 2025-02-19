@@ -1,9 +1,9 @@
 package edu.duke.sj445.battleship;
 
+
 /**
  * This interface represents an Abstract Factory pattern for Ship creation.
  */
-
 public interface AbstractShipFactory<T> {
   /**
    * Make a submarine.
