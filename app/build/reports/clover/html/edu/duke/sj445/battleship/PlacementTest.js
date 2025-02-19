@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":103,"id":899,"methods":[{"el":16,"sc":3,"sl":10},{"el":38,"sc":3,"sl":18},{"el":50,"sc":3,"sl":40},{"el":84,"sc":3,"sl":52},{"el":102,"sc":3,"sl":88}],"name":"PlacementTest","sl":8}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_22":{"methods":[{"sl":52}],"name":"test_string_constructor_valid_cases","pass":true,"statements":[{"sl":54},{"sl":55},{"sl":56},{"sl":57},{"sl":58},{"sl":60},{"sl":61},{"sl":62},{"sl":63},{"sl":64},{"sl":66},{"sl":67},{"sl":68},{"sl":69},{"sl":70},{"sl":72},{"sl":73},{"sl":74},{"sl":75},{"sl":76},{"sl":79},{"sl":80},{"sl":82},{"sl":83}]},"test_30":{"methods":[{"sl":88}],"name":"test_string_constructor_error_cases","pass":true,"statements":[{"sl":90},{"sl":91},{"sl":92},{"sl":93},{"sl":94},{"sl":95},{"sl":96},{"sl":97},{"sl":98},{"sl":99},{"sl":100},{"sl":101}]},"test_37":{"methods":[{"sl":40}],"name":"test_hashCode","pass":true,"statements":[{"sl":42},{"sl":43},{"sl":46},{"sl":47},{"sl":48}]},"test_48":{"methods":[{"sl":10}],"name":"test_with_coord_and_orientation","pass":true,"statements":[{"sl":12},{"sl":13},{"sl":14},{"sl":15}]},"test_9":{"methods":[{"sl":18}],"name":"test_equals","pass":true,"statements":[{"sl":20},{"sl":21},{"sl":22},{"sl":23},{"sl":25},{"sl":26},{"sl":27},{"sl":28},{"sl":29},{"sl":30},{"sl":31},{"sl":32},{"sl":33},{"sl":34},{"sl":35},{"sl":36},{"sl":37}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [48], [], [48], [48], [48], [48], [], [], [9], [], [9], [9], [9], [9], [], [9], [9], [9], [9], [9], [9], [9], [9], [9], [9], [9], [9], [9], [], [], [37], [], [37], [37], [], [], [37], [37], [37], [], [], [], [22], [], [22], [22], [22], [22], [22], [], [22], [22], [22], [22], [22], [], [22], [22], [22], [22], [22], [], [22], [22], [22], [22], [22], [], [], [22], [22], [], [22], [22], [], [], [], [], [30], [], [30], [30], [30], [30], [30], [30], [30], [30], [30], [30], [30], [30], [], []]

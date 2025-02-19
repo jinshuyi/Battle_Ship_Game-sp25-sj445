@@ -25,7 +25,7 @@ dependencies {
     // This dependency is used by the application.
     implementation libs.guava
     
-    testImplementation 'org.junit.platform:junit-platform-launcher:1.6.2'
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.11.4'
     clover 'org.openclover:clover:4.5.2'
 }
 

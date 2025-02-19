@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":83,"id":1034,"methods":[{"el":25,"sc":3,"sl":14},{"el":33,"sc":3,"sl":27},{"el":44,"sc":3,"sl":35},{"el":54,"sc":3,"sl":46},{"el":61,"sc":3,"sl":56},{"el":72,"sc":3,"sl":63},{"el":82,"sc":3,"sl":74}],"name":"RectangleShipTest","sl":13}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_23":{"methods":[{"sl":27}],"name":"test_with_new_constructor","pass":true,"statements":[{"sl":30},{"sl":31},{"sl":32}]},"test_28":{"methods":[{"sl":74}],"name":"test_getDisplay","pass":true,"statements":[{"sl":76},{"sl":77},{"sl":78},{"sl":79},{"sl":80},{"sl":81}]},"test_42":{"methods":[{"sl":63}],"name":"test_getCoordinates","pass":true,"statements":[{"sl":65},{"sl":66},{"sl":67},{"sl":68},{"sl":69},{"sl":70},{"sl":71}]},"test_5":{"methods":[{"sl":35}],"name":"test_with_recordHitAt","pass":true,"statements":[{"sl":37},{"sl":38},{"sl":39},{"sl":40},{"sl":41},{"sl":42},{"sl":43}]},"test_51":{"methods":[{"sl":46}],"name":"test_is_Sunk","pass":true,"statements":[{"sl":48},{"sl":49},{"sl":50},{"sl":51},{"sl":52},{"sl":53}]},"test_52":{"methods":[{"sl":56}],"name":"test_get_name","pass":true,"statements":[{"sl":58},{"sl":59},{"sl":60}]},"test_8":{"methods":[{"sl":14}],"name":"test_with_makeCoords","pass":true,"statements":[{"sl":16},{"sl":17},{"sl":18},{"sl":19},{"sl":21},{"sl":22},{"sl":23}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [8], [], [8], [8], [8], [8], [], [8], [8], [8], [], [], [], [23], [], [], [23], [23], [23], [], [], [5], [], [5], [5], [5], [5], [5], [5], [5], [], [], [51], [], [51], [51], [51], [51], [51], [51], [], [], [52], [], [52], [52], [52], [], [], [42], [], [42], [42], [42], [42], [42], [42], [42], [], [], [28], [], [28], [28], [28], [28], [28], [28], [], []]

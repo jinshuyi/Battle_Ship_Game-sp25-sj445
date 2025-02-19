@@ -1,40 +1,53 @@
 package edu.duke.sj445.battleship;
 
-public class V1ShipFactory implements AbstractShipFactory<Character>{
-  /**
-	 * @param where the placement info, containing the coordinate and orientation
-	 * @param w width of the ship
-	 * @param h height of the ship
-	 * @param letter the display char
-	 * @param name the name of the ship
-	 * create a rectangleship for V1
-   */
-  protected Ship<Character> createShip(Placement where, int w, int h, char letter, String name){
-    if(where.getOrientation() == 'H'){
-      int temp = w;
-      w = h;
-      h = temp;
+
+public class V1ShipFactory implements AbstractShipFactory<Character> {
+
+  protected Ship<Character> createShip(Placement where, int w, int h, char letter, String name) {
+
+    Coordinate upperLeft = where.getCoordinate();
+    Character orien = where.getOrientation();
+    RectangleShip<Character> tmp =  new RectangleShip<>(name, upperLeft, w, h, letter, '*',orien);;
+   
+    if(orien == 'h' || orien =='H'){
+      tmp = new RectangleShip<>(name, upperLeft, h, w, letter, '*',orien);
     }
-    return new RectangleShip<Character>(name, where.getWhere(), w, h, letter, '*', where);
+    return tmp;
+
+  };
+
+  public boolean Orientation_checker_v1(Placement where){
+    char orientation = where.getOrientation();
+    if(!(orientation == 'v' ||
+            orientation == 'V' || orientation == 'H' || orientation == 'h' )){
+      throw new IllegalArgumentException("The Orientation is not valid");
+    }
+    return true;
   }
+
   @Override
   public Ship<Character> makeSubmarine(Placement where) {
+    // TODO Auto-generated method stub
+    Orientation_checker_v1(where);
     return createShip(where, 1, 2, 's', "Submarine");
   }
 
   @Override
   public Ship<Character> makeBattleship(Placement where) {
+    // TODO Auto-generated method stub
     return createShip(where, 1, 4, 'b', "Battleship");
   }
 
   @Override
   public Ship<Character> makeCarrier(Placement where) {
+    // TODO Auto-generated method stub
     return createShip(where, 1, 6, 'c', "Carrier");
   }
 
   @Override
   public Ship<Character> makeDestroyer(Placement where) {
+    // TODO Auto-generated method stub
+    Orientation_checker_v1(where);
     return createShip(where, 1, 3, 'd', "Destroyer");
   }
-
 }

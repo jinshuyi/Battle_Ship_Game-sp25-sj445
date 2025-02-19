@@ -10,83 +10,77 @@ import java.util.function.Function;
  * one for the player's own board, and one for the 
  * enemy's board.
  */
+
 public class BoardTextView {
   /**
    * The Board to display
    */
   private final Board<Character> toDisplay;
-  
- /**
+    /**
    * Constructs a BoardView, given the board it will display.
-   * 
    * @param toDisplay is the Board to display
    * @throws IllegalArgumentException if the board is larger than 10x26.  
    */
-  public BoardTextView(Board<Character> toDisplay) {
+   
+
+  
+    public BoardTextView(Board<Character> toDisplay) {
     this.toDisplay = toDisplay;
     if (toDisplay.getWidth() > 10 || toDisplay.getHeight() > 26) {
       throw new IllegalArgumentException(
           "Board must be no larger than 10x26, but is " + toDisplay.getWidth() + "x" + toDisplay.getHeight());
     }
   }
-  
-  /**
-   * This makes all the lines, e.g.   0|1\n
-   *                                A  |  A\n
-   *                                B  |  B\n
-   *                                  0|1\n
-   * 
-   * @return the String for the given board
-   */
-  protected String displayAnyBoard(Function<Coordinate, Character> getSquareFn){
-    StringBuilder ans = new StringBuilder("  "); // README shows two spaces at
-    String sep=""; //start with nothing to separate, then switch to | to separate
-    for (int i = 0; i < toDisplay.getWidth(); i++) {
-      ans.append(sep);
-      ans.append(i);
-      sep = "|";
-    }
-    ans.append("\n");
-    StringBuilder bd = new StringBuilder("");
-    for (int row = 0; row < toDisplay.getHeight(); row++) {
-      int num = row + 65;
-      bd.append((char)num + " ");
-      for (int column = 0; column < toDisplay.getWidth(); column++) {
-        
-        Coordinate c = new Coordinate(row, column);
-        if (getSquareFn.apply(c) == null){
-          bd.append(" ");
-        }
-        else {
-          bd.append(getSquareFn.apply(c));
-        }
-       if (column < toDisplay.getWidth() - 1){
-          bd.append("|");
-        }        
-      }
-      bd.append(" " + (char)num + "\n");
-    }
-    return ans.toString()+bd.toString()+ans.toString();
-  }
+   public String displayMyOwnBoard() {
 
-  /**
-   * @return the String that represents self's boardTextView
-   */
-  public String displayMyOwnBoard() {
-    return displayAnyBoard((c)->toDisplay.whatIsAtForSelf(c));
-  }
+     return displayAnyBoard((c)->toDisplay.whatIsAtForSelf(c));
+ }
 
-  /**
-   * @return the String that represents enemy's boardTextView
-   */
   public String displayEnemyBoard(){
-    return displayAnyBoard((c)->toDisplay.whatIsAtForEnemy(c));
+
+      return displayAnyBoard((c)->toDisplay.whatIsAtForEnemy(c));
   }
 
-  /**
-   * This makes the header lines, e.g. 0|1|2|3|4\n
-   * 
-   * @return the String that is the header line for the given board
+  protected String displayAnyBoard(Function<Coordinate, Character> getSquareFn){
+        StringBuilder ans = new StringBuilder();
+     ans.append(makeHeader());
+     /*
+start to develop the board
+      */
+     for(int i = 0 ; i < toDisplay.getHeight(); i++){
+       char tmp = (char)(i + 97);
+       ans.append(Character.toUpperCase(tmp));
+       ans.append(" ");
+       for(int j = 0 ; j < toDisplay.getWidth();j++){
+         if(j == toDisplay.getWidth() - 1){
+             if(getSquareFn.apply(new Coordinate(i,j)) != null){
+                 ans.append(getSquareFn.apply(new Coordinate(i,j)));
+                 ans.append(" ");
+             }
+             else{
+                 ans.append("  ");
+             }
+           ans.append(Character.toUpperCase(tmp));
+         }
+         else{
+           if(getSquareFn.apply(new Coordinate(i,j)) != null){
+             ans.append(getSquareFn.apply(new Coordinate(i,j)));
+             }
+           else{
+           ans.append(" ");
+           }
+           ans.append("|");
+           }
+       }
+       ans.append("\n");
+     }
+     ans.append(makeHeader());
+     return ans.toString();
+    
+  }
+
+  /*
+    Construct the the first row of the board
    */
   String makeHeader() {
     StringBuilder ans = new StringBuilder("  "); // README shows two spaces at
@@ -97,6 +91,53 @@ public class BoardTextView {
       sep = "|";
     }
     ans.append("\n");
+    return ans.toString();
+  }
+  
+  public String displayMyBoardWithEnemyNextToIt(BoardTextView enemyView, String myHeader, String enemyHeader) {
+    String[] myLines = displayMyOwnBoard().split("\n");
+    String[] enemyLines = enemyView.displayEnemyBoard().split("\n");
+
+    StringBuilder ans = new StringBuilder();
+    int header_start =5;
+    int header_space = 2 * toDisplay.getWidth() + 22 - myHeader.length() - header_start;
+    int string_space = 16;
+    int string_start_space = 18;
+    
+    /*start to put all things in the stringBuilder */
+    ans.append("\n");
+    ans.append(helper(header_start));
+    ans.append(myHeader);
+    ans.append(helper(header_space));
+    ans.append(enemyHeader);
+    ans.append("\n");
+
+     ans.append(myLines[0]);
+     ans.append(helper(string_start_space));
+     ans.append(enemyLines[0]);
+     ans.append("\n");
+
+    
+     /*start to tackle the file itself*/
+    for(int i=1; i<myLines.length-1;i++){
+      ans.append(myLines[i]);
+      ans.append(helper(string_space));
+      ans.append(enemyLines[i]);
+      ans.append("\n");
+    }
+
+      ans.append(myLines[myLines.length-1]);
+      ans.append(helper(string_start_space));
+      ans.append(enemyLines[myLines.length-1]);
+      ans.append("\n");
+    return ans.toString();
+  }
+
+  public String helper(int k){
+    StringBuilder ans = new StringBuilder();
+    for(int i = 0 ; i < k ; ++i){
+      ans.append(" ");
+    }
     return ans.toString();
   }
 }

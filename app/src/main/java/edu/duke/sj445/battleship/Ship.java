@@ -1,11 +1,30 @@
 package edu.duke.sj445.battleship;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * This interface represents any type of Ship in our Battleship game. It is
  * generic in typename T, which is the type of information the view needs to
  * display this ship.
+ * @param boolean myShip means whether this is my ship or not
  */
+
 public interface Ship<T> {
+
+   /**
+   * Get all of the Coordinates that this Ship occupies.
+   * @return An Iterable with the coordinates that this Ship occupies
+   */
+  public Iterable<Coordinate> getCoordinates();
+
+  /**
+   * Get the name of this Ship, such as "submarine".
+   * @return the name of this ship
+   */
+  public String getName();
+
+
   /**
    * Check if this ship occupies the given coordinate.
    * 
@@ -48,28 +67,10 @@ public interface Ship<T> {
    * must be part of the ship.
    * 
    * @param where is the coordinate to return information for
-   * @param myShip true if the given coordinate is on my board, false if on enemy's board
    * @throws IllegalArgumentException if where is not part of the Ship
    * @return The view-specific information at that coordinate.
    */
   public T getDisplayInfoAt(Coordinate where, boolean myShip);
-
-  /**
-   * Get the name of this Ship, such as "submarine".
-   * @return the name of this ship
-   */
- public String getName();
-
-  /**
-   * Get all of the Coordinates that this Ship occupies.
-   * @return An Iterable with the coordinates that this Ship occupies
-   */
-  public Iterable<Coordinate> getCoordinates();
-
-  /**
-   * Get the upperleft point's info of this Ship
-   * @return the placement of upperleft of this ship
-   */
-  public Placement getUpperLeft();
-
+  public HashMap<Coordinate, Integer> getMyPieces_order();
+  public List<Integer> getOrder_hit();
 }

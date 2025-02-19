@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.duke.sj445.battleship.V1ShipFactoryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-02-18T19:59:26" hostname="vcm-46190.vm.duke.edu" time="0.006">
+<testsuite name="edu.duke.sj445.battleship.V1ShipFactoryTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2025-02-19T00:58:37" hostname="vcm-46190.vm.duke.edu" time="0.029">
   <properties/>
-  <testcase name="test_()" classname="edu.duke.sj445.battleship.V1ShipFactoryTest" time="0.006"/>
+  <testcase name="test_with_Submarine()" classname="edu.duke.sj445.battleship.V1ShipFactoryTest" time="0.003"/>
+  <testcase name="test_with_Destroyer()" classname="edu.duke.sj445.battleship.V1ShipFactoryTest" time="0.006"/>
+  <testcase name="test_with_Destroyer_wrong()" classname="edu.duke.sj445.battleship.V1ShipFactoryTest" time="0.002"/>
+  <testcase name="test_with_Submarine_wrong()" classname="edu.duke.sj445.battleship.V1ShipFactoryTest" time="0.003"/>
+  <testcase name="test_with_Carrier()" classname="edu.duke.sj445.battleship.V1ShipFactoryTest" time="0.002"/>
+  <testcase name="test_with_Battleship()" classname="edu.duke.sj445.battleship.V1ShipFactoryTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

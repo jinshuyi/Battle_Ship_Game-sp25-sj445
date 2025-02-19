@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.duke.sj445.battleship.AppTest" tests="2" skipped="0" failures="1" errors="0" timestamp="2025-02-18T19:59:26" hostname="vcm-46190.vm.duke.edu" time="0.073">
+<testsuite name="edu.duke.sj445.battleship.AppTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-02-19T00:58:36" hostname="vcm-46190.vm.duke.edu" time="0.14">
   <properties/>
-  <testcase name="test_main()" classname="edu.duke.sj445.battleship.AppTest" time="0.061">
-    <failure message="org.opentest4j.AssertionFailedError: expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: not &lt;null&gt;
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at app//org.junit.jupiter.api.AssertNotNull.failNull(AssertNotNull.java:49)
-	at app//org.junit.jupiter.api.AssertNotNull.assertNotNull(AssertNotNull.java:35)
-	at app//org.junit.jupiter.api.AssertNotNull.assertNotNull(AssertNotNull.java:30)
-	at app//org.junit.jupiter.api.Assertions.assertNotNull(Assertions.java:304)
-	at app//edu.duke.sj445.battleship.AppTest.__CLR4_5_25cyhwzx9(AppTest.java:49)
-	at app//edu.duke.sj445.battleship.AppTest.test_main(AppTest.java:31)
-	at java.base@21.0.6/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.6/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.6/java.util.ArrayList.forEach(ArrayList.java:1596)
-</failure>
-  </testcase>
-  <testcase name="test_mode()" classname="edu.duke.sj445.battleship.AppTest" time="0.011"/>
-  <system-out><![CDATA[Invalid Choice, please enter again!
-]]></system-out>
+  <testcase name="test_main()" classname="edu.duke.sj445.battleship.AppTest" time="0.14"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
