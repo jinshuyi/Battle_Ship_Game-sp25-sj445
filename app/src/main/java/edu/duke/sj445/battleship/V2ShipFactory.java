@@ -14,6 +14,12 @@ public class V2ShipFactory implements AbstractShipFactory<Character> {
 		return new SpecialShip<Character>(name, upperLefts, widths, heights, letter, '*', upperLeft);
 	}
 
+  /**
+   * Creates a Submarine, which can only be placed horizontally (H) or vertically (V).
+   * @param where The placement information of the submarine.
+   * @return A new instance of the Submarine ship.
+   * @throws IllegalArgumentException If the orientation is not 'H' or 'V'.
+   */
   @Override
   public Ship<Character> makeSubmarine(Placement where) {
     char o = where.getOrientation();
@@ -23,18 +29,27 @@ public class V2ShipFactory implements AbstractShipFactory<Character> {
     V1ShipFactory factoryV1 = new V1ShipFactory();
     return factoryV1.createShip(where,1,2,'s',"Submarine");
   }
-  
+
+  /**
+   * Creates a Battleship, which has a special shape and can be placed in four orientations: U, R, D, L.
+   * @param where The placement information of the battleship.
+   * @return A new instance of the Battleship ship.
+   * @throws IllegalArgumentException If the orientation is not 'U', 'R', 'D', or 'L'.
+   */
   @Override
   public Ship<Character> makeBattleship(Placement where) {
     char o = where.getOrientation();
     if(o != 'U' && o != 'R' && o != 'D' && o != 'L'){
       throw new IllegalArgumentException("That placement is invalid: it does not have the correct format(U, R, D, L).");
     }
+    // Extract rows and column from the placement positoin
     int row = where.getWhere().getRow();
     int column = where.getWhere().getColumn();
     Coordinate[] upperLefts = new Coordinate[2];
     int[] widths = new int[2];
     int[] heights = new int[2];
+
+   // Set the shape of the battleship based on orientation
     switch(o){
     case 'U':
       /*

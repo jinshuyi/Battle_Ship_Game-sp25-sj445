@@ -4,7 +4,7 @@ var clover = new Object();
 clover.pageData = {"classes":[{"el":13,"id":1086,"methods":[{"el":11,"sc":3,"sl":8}],"name":"BoardTest","sl":7}]}
 
 // JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
-clover.testTargets = {"test_25":{"methods":[{"sl":8}],"name":"test_","pass":true,"statements":[]}}
+clover.testTargets = {"test_48":{"methods":[{"sl":8}],"name":"test_","pass":true,"statements":[]}}
 
 // JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
-clover.srcFileLines = [[], [], [], [], [], [], [], [], [25], [], [], [], [], []]
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [48], [], [], [], [], []]

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.duke.sj445.battleship.PlacementTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2025-02-19T02:53:11" hostname="vcm-46190.vm.duke.edu" time="0.032">
+<testsuite name="edu.duke.sj445.battleship.PlacementTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2025-02-19T03:08:04" hostname="vcm-46190.vm.duke.edu" time="0.029">
   <properties/>
-  <testcase name="test_string_constructor_valid_cases()" classname="edu.duke.sj445.battleship.PlacementTest" time="0.004"/>
-  <testcase name="test_hashCode()" classname="edu.duke.sj445.battleship.PlacementTest" time="0.011"/>
-  <testcase name="test_string_constructor_error_cases()" classname="edu.duke.sj445.battleship.PlacementTest" time="0.005"/>
-  <testcase name="test_equals()" classname="edu.duke.sj445.battleship.PlacementTest" time="0.003"/>
-  <testcase name="test_()" classname="edu.duke.sj445.battleship.PlacementTest" time="0.002"/>
-  <testcase name="test_toString()" classname="edu.duke.sj445.battleship.PlacementTest" time="0.002"/>
+  <testcase name="test_string_constructor_valid_cases()" classname="edu.duke.sj445.battleship.PlacementTest" time="0.003"/>
+  <testcase name="test_hashCode()" classname="edu.duke.sj445.battleship.PlacementTest" time="0.009"/>
+  <testcase name="test_string_constructor_error_cases()" classname="edu.duke.sj445.battleship.PlacementTest" time="0.004"/>
+  <testcase name="test_equals()" classname="edu.duke.sj445.battleship.PlacementTest" time="0.002"/>
+  <testcase name="test_()" classname="edu.duke.sj445.battleship.PlacementTest" time="0.003"/>
+  <testcase name="test_toString()" classname="edu.duke.sj445.battleship.PlacementTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
